@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RESTOBAR ALEX - Menú Digital</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode.js/1.5.3/qrcode.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+            padding: 2rem 1rem;
+            text-align: center;
+            border-bottom: 3px solid #FFD700;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            box-shadow: 0 4px 20px rgba(255, 215, 0, 0.1);
+        }
+
+        .header h1 {
+            font-size: 2.8rem;
+            font-weight: 900;
+            color: #FFD700;
+            letter-spacing: 3px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            margin-bottom: 0.3rem;
+        }
+
+        .header p {
+            color: #aaa;
+            font-size: 0.95rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 1rem;
+            padding-bottom: 350px;
+        }
+
+        /* Menu Section */
+        .menu-section {
+            background: linear-gradient(135deg, #1a1a1a 0%, #242424 100%);
+            border-radius: 16px;
+            padding: 2rem 1.5rem;
+            margin-bottom: 2rem;
+            border: 1px solid #333;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            display: none;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        .menu-section.active {
+            display: block;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .menu-section h2 {
+            font-size: 1.8rem;
+            color: #FFD700;
+            border-bottom: 3px solid #FFD700;
+            padding-bottom: 1rem;
+            margin-bottom: 1.5rem;
+            letter-spacing: 1px;
+        }
+
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 1.2rem 0;
+            border-bottom: 1px solid #333;
+            transition: all 0.2s ease;
+        }
+
+        .menu-item:last-child {
+            border-bottom: none;
+        }
+
+        .menu-item:hover {
+            background: rgba(46, 204, 113, 0.05);
+            padding-left: 0.5rem;
+            padding-right: 0.5rem;
+            margin: 0 -0.5rem;
+            border-radius: 8px;
+        }
+
+        .item-info h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.4rem;
+            color: #fff;
+        }
+
+        .item-desc {
+            font-size: 0.85rem;
+            color: #999;
+            line-height: 1.4;
+            margin: 0;
+        }
+
+        .item-price {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: #FFD700;
+            margin-left: 1rem;
+            white-space: nowrap;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Navigation Tabs */
+        .nav-container {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #0a0a0a;
+            border-top: 2px solid #FFD700;
+            padding: 0.8rem;
+            z-index: 100;
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .nav-wrapper {
+            max-width: 700px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
+            gap: 0.6rem;
+        }
+
+        .nav-btn {
+            padding: 0.7rem 0.4rem;
+            background: #1a1a1a;
+            color: #fff;
+            border: 1px solid #333;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 0.75rem;
+            font-weight: 700;
+            transition: all 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.3rem;
+            text-align: center;
+        }
+
+        .nav-btn:active {
+            transform: scale(0.95);
+        }
+
+        .nav-btn.active {
+            background: #FFD700;
+            color: #000;
+            border-color: #FFD700;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+        }
+
+        .nav-emoji {
+            font-size: 1.2rem;
+        }
+
+        /* FAB Buttons */
+        .fab-container {
+            position: fixed;
+            bottom: 320px;
+            left: 1rem;
+            right: 1rem;
+            max-width: 700px;
+            margin: 0 auto;
+            display: flex;
+            gap: 0.8rem;
+            z-index: 90;
+            padding: 0 calc((100vw - 700px) / 2);
+        }
+
+        .fab-btn {
+            flex: 1;
+            padding: 0.9rem 1rem;
+            border: none;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .fab-whatsapp {
+            background: #25D366;
+            color: #fff;
+        }
+
+        .fab-whatsapp:hover {
+            background: #20BA5A;
+            transform: translateY(-2px);
+        }
+
+        .fab-qr {
+            background: #FFD700;
+            color: #000;
+        }
+
+        .fab-qr:hover {
+            background: #E6C200;
+            transform: translateY(-2px);
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 200;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: #1a1a1a;
+            border-radius: 20px;
+            padding: 2.5rem 1.5rem;
+            text-align: center;
+            max-width: 450px;
+            border: 2px solid #FFD700;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            animation: popIn 0.3s ease-out;
+        }
+
+        @keyframes popIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .modal-content h3 {
+            font-size: 1.5rem;
+            color: #FFD700;
+            margin-bottom: 1.5rem;
+            letter-spacing: 1px;
+        }
+
+        #qrcode {
+            background: #fff;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin: 1.5rem 0;
+            display: inline-block;
+        }
+
+        #qrcode svg {
+            width: 200px;
+            height: 200px;
+        }
+
+        .modal-desc {
+            color: #999;
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .modal-close {
+            padding: 0.9rem 2rem;
+            background: #FFD700;
+            color: #000;
+            border: none;
+            border-radius: 10px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1rem;
+        }
+
+        .modal-close:hover {
+            background: #E6C200;
+            transform: translateY(-2px);
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 2.2rem;
+            }
+
+            .nav-wrapper {
+                grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+            }
+
+            .nav-btn {
+                font-size: 0.7rem;
+                padding: 0.6rem 0.3rem;
+            }
+
+            .nav-emoji {
+                font-size: 1rem;
+            }
+
+            .item-info h3 {
+                font-size: 1rem;
+            }
+
+            .fab-btn {
+                font-size: 0.85rem;
+                padding: 0.8rem 0.8rem;
+            }
+        }
+
+        /* Loading */
+        .loading {
+            text-align: center;
+            padding: 2rem;
+            color: #999;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <h1>RESTOBAR ALEX</h1>
+        <p>🍽️ Tapas & Hamburguesas • Santa Perpetua 🍽️</p>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Tapas Frías -->
+        <div id="tapas-frias" class="menu-section active">
+            <h2>🥒 Tapas Frías</h2>
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>Boquerones en Vinagre</h3>
+                </div>
+                <div class="item-price">€7,50</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>Jamón Ibérico</h3>
+                </div>
+                <div class="item-price">€8,00</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>Queso de Cabra</h3>
+                </div>
+                <div class="item-price">€7,50</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>Tabla Mixta</h3>
+                </div>
+                <div class="item-price">€12,00</div>
+            </div>
+        </div>
+
+        <!-- Hamburguesas -->
+        <div id="hamburguesas" class="menu-section">
+            <h2>🍔 Hamburguesas</h2>
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>La Restopás</h3>
+                    <p class="item-desc">Squash • Cuedan • Champiñones al salsa • Pimiento</p>
+                </div>
+                <div class="item-price">€12,00</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>Especial Avenida</h3>
+                    <p class="item-desc">Cuedan • Beicón • Pimiento caramelizado</p>
+                </div>
+                <div class="item-price">€11,00</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>Mollete</h3>
+                    <p class="item-desc">Champiñones • Col y salsa Béarnaise</p>
+                </div>
+                <div class="item-price">€7,00</div>
+            </div>
+        </div>
+
+        <!-- Croquetas -->
+        <div id="croquetas" class="menu-section">
+            <h2>🍤 Croquetas</h2>
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>Surtido Croquetas</h3>
+                    <p class="item-desc">Pollo • Jamón • Cabralas • Chipirón • Rabo Toro</p>
+                </div>
+                <div class="item-price">€6,80</div>
+            </div>
+        </div>
+
+        <!-- Platos Principales -->
+        <div id="platos" class="menu-section">
+            <h2>🍽️ Platos Principales</h2>
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>Patatas Restopás</h3>
+                    <p class="item-desc">Patatas • Cuedan • Pollo pinto • Cebolla crujiente • Salsa BBQ</p>
+                </div>
+                <div class="item-price">€10,50</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>Rabo Vaco en Salsa</h3>
+                </div>
+                <div class="item-price">€13,50</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>Solomillo al Roquefort</h3>
+                </div>
+                <div class="item-price">€14,50</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>Lomo al Roquefort</h3>
+                </div>
+                <div class="item-price">€13,50</div>
+            </div>
+        </div>
+
+        <!-- Carnes -->
+        <div id="carnes" class="menu-section">
+            <h2>🥩 Carnes a la Brasa</h2>
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>Presa Cerdo Ibérico</h3>
+                </div>
+                <div class="item-price">€12,50</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>Plumé Cerdo Ibérico</h3>
+                </div>
+                <div class="item-price">€12,50</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>Solomillo</h3>
+                </div>
+                <div class="item-price">€15,00</div>
+            </div>
+        </div>
+
+        <!-- Bocadillos -->
+        <div id="bocadillos" class="menu-section">
+            <h2>🥪 Bocadillos</h2>
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>De Pollo</h3>
+                </div>
+                <div class="item-price">€4,50</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>De Hamburguesa</h3>
+                </div>
+                <div class="item-price">€5,80</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>De Francesa</h3>
+                </div>
+                <div class="item-price">€4,00</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>Mixto</h3>
+                </div>
+                <div class="item-price">€4,80</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>Cerveza (Acompañamiento)</h3>
+                </div>
+                <div class="item-price">€3,80</div>
+            </div>
+        </div>
+
+        <!-- Ensaladas -->
+        <div id="ensaladas" class="menu-section">
+            <h2>🥗 Ensaladas</h2>
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>Queso de Cabra</h3>
+                </div>
+                <div class="item-price">€9,50</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>Verde</h3>
+                </div>
+                <div class="item-price">€7,50</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>César</h3>
+                </div>
+                <div class="item-price">€9,50</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>Atún</h3>
+                </div>
+                <div class="item-price">€8,90</div>
+            </div>
+        </div>
+
+        <!-- Bebidas -->
+        <div id="bebidas" class="menu-section">
+            <h2>🍹 Bebidas</h2>
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>Cerveza</h3>
+                </div>
+                <div class="item-price">€3,80</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>Refresco</h3>
+                </div>
+                <div class="item-price">€2,50</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>Agua</h3>
+                </div>
+                <div class="item-price">€1,50</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FAB Buttons -->
+    <div class="fab-container">
+        <a href="https://wa.me/34697898855?text=Hola%20Restopass%2C%20me%20gustaría%20hacer%20una%20reserva" class="fab-btn fab-whatsapp" id="whatsapp-btn">
+            <span>📱</span> Reservar
+        </a>
+        <button class="fab-btn fab-qr" onclick="openQRModal()">
+            <span>🔗</span> Compartir QR
+        </button>
+    </div>
+
+    <!-- Navigation -->
+    <div class="nav-container">
+        <div class="nav-wrapper">
+            <button class="nav-btn active" onclick="switchTab('tapas-frias')">
+                <span class="nav-emoji">🥒</span>
+                <span>Tapas</span>
+            </button>
+            <button class="nav-btn" onclick="switchTab('hamburguesas')">
+                <span class="nav-emoji">🍔</span>
+                <span>Burgers</span>
+            </button>
+            <button class="nav-btn" onclick="switchTab('croquetas')">
+                <span class="nav-emoji">🍤</span>
+                <span>Croquetas</span>
+            </button>
+            <button class="nav-btn" onclick="switchTab('platos')">
+                <span class="nav-emoji">🍽️</span>
+                <span>Platos</span>
+            </button>
+            <button class="nav-btn" onclick="switchTab('carnes')">
+                <span class="nav-emoji">🥩</span>
+                <span>Carnes</span>
+            </button>
+            <button class="nav-btn" onclick="switchTab('bocadillos')">
+                <span class="nav-emoji">🥪</span>
+                <span>Bocadillos</span>
+            </button>
+            <button class="nav-btn" onclick="switchTab('ensaladas')">
+                <span class="nav-emoji">🥗</span>
+                <span>Ensaladas</span>
+            </button>
+            <button class="nav-btn" onclick="switchTab('bebidas')">
+                <span class="nav-emoji">🍹</span>
+                <span>Bebidas</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- QR Modal -->
+    <div id="qr-modal" class="modal">
+        <div class="modal-content">
+            <h3>📱 Comparte nuestro menú</h3>
+            <div id="qrcode"></div>
+            <p class="modal-desc">Escanea este código para acceder a nuestro menú digital desde cualquier móvil</p>
+            <button class="modal-close" onclick="closeQRModal()">Cerrar</button>
+        </div>
+    </div>
+
+    <script>
+        function switchTab(tabId) {
+            // Hide all sections
+            document.querySelectorAll('.menu-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Remove active from all buttons
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Show selected section
+            document.getElementById(tabId).classList.add('active');
+            
+            // Add active to clicked button
+            event.target.closest('.nav-btn').classList.add('active');
+            
+            // Scroll to top
+            document.querySelector('.container').scrollTop = 0;
+        }
+
+        function openQRModal() {
+            document.getElementById('qr-modal').classList.add('active');
+            
+            // Generate QR Code
+            const qrcodeContainer = document.getElementById('qrcode');
+            qrcodeContainer.innerHTML = ''; // Clear previous QR
+            
+            new QRCode(qrcodeContainer, {
+                text: window.location.href,
+                width: 200,
+                height: 200,
+                colorDark: '#2ecc71',
+                colorLight: '#fff',
+                correctLevel: QRCode.CorrectLevel.H
+            });
+        }
+
+        function closeQRModal() {
+            document.getElementById('qr-modal').classList.remove('active');
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('qr-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeQRModal();
+            }
+        });
+
+        // IMPORTANTE: Cambiar número de WhatsApp
+        // Reemplaza "34XXXXXXXXXX" con tu número (sin espacios ni guiones)
+        // Ejemplo: 34612345678
+    </script>
+</body>
+</html>
