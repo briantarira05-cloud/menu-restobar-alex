@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio | Restobar Alex</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Restaurant",
+      "name": "Restobar Alex",
+      "image": "https://restobaralex.github.io/menu-restobar-alex/images/nuevo-logo.jpg",
+      "@id": "https://restobaralex.github.io/menu-restobar-alex/",
+      "url": "https://restobaralex.github.io/menu-restobar-alex/",
+      "telephone": "+34 697 89 88 55",
+      "priceRange": "$$",
+      "menu": "https://restobaralex.github.io/menu-restobar-alex/menu.html",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Calle Feliu y Codina 47",
+        "addressLocality": "Cornellà de Llobregat",
+        "postalCode": "08940",
+        "addressCountry": "ES"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 41.353347,
+        "longitude": 2.073403
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Sunday"
+          ],
+          "opens": "09:00",
+          "closes": "00:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Friday",
+            "Saturday"
+          ],
+          "opens": "09:00",
+          "closes": "01:00"
+        }
+      ],
+      "sameAs": [
+        "https://www.instagram.com/restobaralex"
+      ]
+    }
+    </script>
+</head>
+<body>
+
+    <!-- Navbar Clásica -->
+    <nav class="navbar">
+        <a href="index.html" class="logo">
+            <img src="images/nuevo-logo.jpg" alt="Restobar Alex">
+        </a>
+        <div class="mobile-menu-btn" id="mobile-btn">
+            <i class="fas fa-bars"></i>
+        </div>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="index.html" class="active">Inicio</a></li>
+            <li><a href="menu.html">La Carta</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section (Inicio) -->
+    <section class="hero">
+        <div class="hero-left">
+            <h2 class="sub-title">Restobar Alex</h2>
+            <h1 class="main-title">EL AUTÉNTICO SABOR QUE MERECES</h1>
+            <a href="menu.html" class="btn-gold">Ver la Carta</a>
+        </div>
+        <div class="hero-right" style="background-image: url('images/hamburguesa-inicio.jpg');">
+        </div>
+    </section>
+
+    <!-- Marquee Scrolling Line -->
+    <div class="marquee-container">
+        <div class="marquee-text">
+            <span>EL AUTÉNTICO SABOR QUE MERECES / EL AUTÉNTICO SABOR QUE MERECES / EL AUTÉNTICO SABOR QUE MERECES / EL AUTÉNTICO SABOR QUE MERECES / EL AUTÉNTICO SABOR QUE MERECES / EL AUTÉNTICO SABOR QUE MERECES / </span>
+            <span>EL AUTÉNTICO SABOR QUE MERECES / EL AUTÉNTICO SABOR QUE MERECES / EL AUTÉNTICO SABOR QUE MERECES / EL AUTÉNTICO SABOR QUE MERECES / EL AUTÉNTICO SABOR QUE MERECES / EL AUTÉNTICO SABOR QUE MERECES / </span>
+        </div>
+    </div>
+
+    <!-- Split Banner Section (Smash Hiro Style) -->
+    <section class="split-banners">
+        <div class="banner-box" style="background-image: url('images/fondo-carta.jpg');">
+            <div class="banner-overlay"></div>
+            <a href="contacto.html" class="banner-link-text">RESTAURANTE</a>
+        </div>
+        <div class="banner-box" style="background-image: url('images/huevo-pro.jpg');">
+            <div class="banner-overlay"></div>
+            <a href="menu.html" class="banner-link-text">NUESTRO MENÚ</a>
+        </div>
+    </section>
+
+    <!-- Google Reviews Banner -->
+    <div style="background: #111; padding: 20px; text-align: center; border-bottom: 2px solid var(--gold); display: flex; align-items: center; justify-content: center; gap: 15px; flex-wrap: wrap;">
+        <div style="display: flex; gap: 5px; color: var(--gold); font-size: 1.5rem;">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+        </div>
+        <p style="font-family: var(--font-body); font-weight: 800; font-size: 1.2rem; margin: 0;">4.7/5 en Google (93 reseñas)</p>
+        <a href="https://www.google.com/search?q=restobar+alex" target="_blank" style="background: var(--gold); color: #000; padding: 5px 15px; border-radius: 50px; font-weight: 800; text-transform: uppercase; font-size: 0.9rem;">Ver Reseñas <i class="fab fa-google" style="margin-left: 5px;"></i></a>
+    </div>
+
+    <!-- Gallery / Decoración -->
+    <section class="gallery-section">
+        <h2 class="section-title">NUESTRAS <span>CREACIONES</span></h2>
+        
+        <div class="scrolling-gallery">
+            <div class="gallery-track track-left">
+                <div id="track1"></div>
+            </div>
+            <div class="gallery-track track-right" style="margin-top: 15px;">
+                <div id="track2"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Reseñas en Google para Maximizar Conversión -->
+    <section class="reviews-cta-section">
+        <div class="reviews-cta-card">
+            <div class="reviews-cta-stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+            </div>
+            <h2>¿TE HA GUSTADO NUESTRA COMIDA?</h2>
+            <p>Tu opinión nos ayuda a seguir mejorando y a compartir el auténtico sabor de Cornellà. ¡Déjanos una valoración de 5 estrellas en Google!</p>
+            <div class="reviews-cta-buttons">
+                <a href="https://www.google.com/search?q=restobar+alex" target="_blank" class="btn-gold-review">
+                    <i class="fab fa-google"></i> Escribir Reseña
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Botón flotante de WhatsApp -->
+    <a href="https://wa.me/34697898855" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Restobar Alex. Todos los derechos reservados.</p>
+    </footer>
+
+    <script src="script.js?v=5"></script>
+</body>
+</html>
