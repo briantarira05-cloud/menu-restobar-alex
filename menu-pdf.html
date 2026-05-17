@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carta Oficial PDF | Restobar Alex</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --gold: #f4c025;
+            --bg-dark: #0a0a0a;
+            --card-bg: #121212;
+            --text-main: #ffffff;
+            --text-muted: #aaaaaa;
+        }
+
+        @page {
+            size: A4 portrait;
+            margin: 12mm 15mm;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Outfit', sans-serif;
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+            font-size: 11px;
+            line-height: 1.3;
+        }
+
+        .pdf-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 10px;
+            column-count: 2;
+            column-gap: 20px;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            border-bottom: 2px solid var(--gold);
+            padding-bottom: 12px;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            column-span: all;
+            -webkit-column-span: all;
+        }
+
+        .header-logo {
+            width: 75px;
+            height: 75px;
+            border-radius: 50%;
+            border: 2px solid var(--gold);
+            object-fit: cover;
+        }
+
+        .header-info {
+            text-align: right;
+        }
+
+        .header-info h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.4rem;
+            color: var(--gold);
+            letter-spacing: 2px;
+            line-height: 0.9;
+        }
+
+        .header-info p {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-top: 3px;
+        }
+
+        .header-info span {
+            color: var(--gold);
+            font-weight: 700;
+        }
+
+        /* Column Flow Layout */
+        .menu-grid {
+            display: block;
+            width: 100%;
+        }
+
+        .menu-category-card {
+            background-color: var(--card-bg);
+            border: 1px solid rgba(244, 192, 37, 0.15);
+            border-top: 3px solid var(--gold);
+            border-radius: 8px;
+            padding: 14px;
+            display: block;
+            width: 100%;
+            margin-bottom: 15px;
+            break-inside: auto;
+            page-break-inside: auto;
+        }
+
+        .category-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.4rem;
+            color: var(--gold);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 4px;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .category-title i {
+            font-size: 1rem;
+        }
+
+        /* Items */
+        .menu-item {
+            margin-bottom: 8px;
+            break-inside: avoid;
+            page-break-inside: avoid;
+        }
+
+        .menu-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .menu-item-name {
+            color: var(--text-main);
+        }
+
+        .menu-item-dots {
+            flex-grow: 1;
+            border-bottom: 1px dotted rgba(255, 255, 255, 0.25);
+            margin: 0 6px;
+        }
+
+        .menu-item-price {
+            color: var(--gold);
+            font-weight: 800;
+        }
+
+        .menu-item-description {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 2px;
+            font-style: italic;
+            font-weight: 300;
+        }
+
+        .menu-item-badge {
+            background-color: var(--gold);
+            color: #000;
+            font-size: 0.6rem;
+            font-weight: 800;
+            padding: 1px 4px;
+            border-radius: 3px;
+            margin-left: 5px;
+            text-transform: uppercase;
+            vertical-align: middle;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding-top: 10px;
+            margin-top: 20px;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            column-span: all;
+            -webkit-column-span: all;
+        }
+
+        footer span {
+            color: var(--gold);
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="pdf-container">
+        <!-- Header -->
+        <header>
+            <img src="images/nuevo-logo.jpg" alt="Restobar Alex Logo" class="header-logo">
+            <div class="header-info">
+                <h1>RESTOBAR ALEX</h1>
+                <p>Calle Feliu y Codina 47, Cornellà de Llobregat</p>
+                <p>Pedidos & Reservas: <span>697 89 88 55</span></p>
+            </div>
+        </header>
+
+        <!-- Footer -->
+        <footer>
+            <p>Carta oficial de <span>Restobar Alex</span>. Precios con IVA incluido. Escanea el código QR de nuestras mesas para ver imágenes y alérgenos.</p>
+        </footer>
+    </div>
+
+    <!-- Load menu data -->
+    <script src="menu-data.js"></script>
+    <script>
+        (function() {
+            const header = document.querySelector('header');
+            if (!header) return;
+            
+            // Nice icons mapping for categories
+            const categoryIcons = {
+                tapasFrias: 'fa-snowflake',
+                tapasCalientes: 'fa-fire',
+                hamburguesas: 'fa-hamburger',
+                bocadillosFrios: 'fa-bread-slice',
+                bocadillosCalientes: 'fa-hotdog',
+                ensaladas: 'fa-leaf',
+                platosCombinados: 'fa-utensils',
+                carnesPremium: 'fa-drumstick-bite',
+                postres: 'fa-ice-cream'
+            };
+
+            const categoryTitles = {
+                tapasFrias: 'Tapas Frías',
+                tapasCalientes: 'Tapas Calientes y Raciones',
+                hamburguesas: 'Nuestras Hamburguesas',
+                bocadillosFrios: 'Bocadillos Fríos',
+                bocadillosCalientes: 'Bocadillos Calientes',
+                ensaladas: 'Ensaladas',
+                platosCombinados: 'Platos Combinados y Ofertas',
+                carnesPremium: 'Carnes Premium',
+                postres: 'Postres Caseros'
+            };
+
+            let html = '';
+
+            // Generate each category except "novedades"
+            Object.keys(MENU_DATA).forEach(catKey => {
+                if (catKey === 'novedades') return; // Skip virtual category
+
+                const catObj = MENU_DATA[catKey];
+                if (!catObj || !catObj.items) return;
+
+                const items = catObj.items;
+                const icon = catObj.icon || 'fa-utensils';
+                const title = catObj.title || catKey;
+
+                html += `
+                    <div class="menu-category-card">
+                        <h2 class="category-title">
+                            <i class="fas ${icon}"></i> ${title.toUpperCase()}
+                        </h2>
+                        <div class="category-items">
+                `;
+
+                items.forEach(item => {
+                    const badgeHtml = item.badge ? `<span class="menu-item-badge">${item.badge}</span>` : '';
+                    const itemDesc = item.description || item.desc;
+                    const descHtml = itemDesc ? `<p class="menu-item-description">${itemDesc}</p>` : '';
+                    const priceFormatted = typeof item.price === 'number' ? `${item.price.toFixed(2)}€` : (item.price || 'Consultar');
+
+                    html += `
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <span class="menu-item-name">${item.name}${badgeHtml}</span>
+                                <span class="menu-item-dots"></span>
+                                <span class="menu-item-price">${priceFormatted}</span>
+                            </div>
+                            ${descHtml}
+                        </div>
+                    `;
+                });
+
+                html += `
+                        </div>
+                    </div>
+                `;
+            });
+
+            header.insertAdjacentHTML('afterend', html);
+        })();
+    </script>
+</body>
+</html>
